@@ -1,9 +1,9 @@
 import binascii
 from Crypto.Cipher import AES   
-
+from data.keysPath import keysPath
 
 def findKey():
-    with open('./keys.txt') as fp:
+    with open(keysPath) as fp:
         keys=fp.readlines()
     
     iv=binascii.unhexlify('09080706050403020100A2B2C2D2E2F2'.lower()) 
@@ -19,7 +19,5 @@ def findKey():
         ciphertextAttempt=encryptor.encrypt(plaintext)
 
         if(ciphertextAttempt==ciphertext): 
-            print ('iv: ', binascii.hexlify(iv))
-            print ('plaintext: ', binascii.hexlify(plaintext))
-            print ('key: ', binascii.hexlify(key))
-            print ('ciphertext: ', binascii.hexlify(ciphertextAttempt))
+            strKey = str(binascii.hexlify(key))
+            return strKey
